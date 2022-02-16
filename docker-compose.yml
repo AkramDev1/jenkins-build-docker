@@ -1,0 +1,36 @@
+# # docker-compose.yaml
+# version: '2'
+# services:
+#   jenkins:
+#     image: 'jenkins'
+#     container_name: "jenkins"
+#     labels:
+#         kompose.service.type: nodeport 
+#     ports:
+#       - '8080:8080'
+#       - '443:8443'
+#       - '50000:50000'
+#     volumes:
+#       - /srv/data/jenkins_data:/jenkins_home
+#       - /srv/data/jenkins:/var/jenkins_config
+
+# volumes:
+#   jenkins_data:
+#     driver: local
+
+
+
+# docker-compose.yaml
+version: '3.8'
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    privileged: true
+    user: root
+    ports:
+      - 8080:8080
+      - 50000:50000
+    container_name: jenkins
+    volumes:
+      - /home/${myname}/jenkins_compose/jenkins_configuration:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
